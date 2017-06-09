@@ -1,0 +1,23 @@
+---
+declared-services:
+  Voz a texto-w0:
+    label: speech_to_text
+    plan: standard
+  Language Translator-jw:
+    label: language_translation
+    plan: lite
+  Texto a voz-14:
+    label: text_to_speech
+    plan: standard	
+applications:
+- path: .
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  name: speechtaavo
+  host: speechtaavo
+  disk_quota: 1024M
+  services:
+  - Language Translator-jw
+  - Texto a voz-14
+  - Voz a texto-w0

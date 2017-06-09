@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Voz a Voz</title>
+    <link href="css/watson-bootstrap-style.css" rel="stylesheet">
+    <link href="css/browser-compatibility.css" rel="stylesheet">
+    <link href="css/demo-stt.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    
+
+    <link rel="icon" type="image/png" href="images/favicon.png">
+  </head>
+  <body>
+    <!-- top nav section -->
+
+    <!-- Service Description Bar -->
+    <!-- Step 1 Section-->
+	<div class="container">
+	    <div class="col-lg-12 col-md-12 col-xs-12 main-header">
+          <h1>Voz a Voz</h1>
+        </div>
+	  <!-- Step 3 Section-->
+	  <!-- First column of inputs -->
+	  <div class="row">
+	  	<div class="col-lg-12 col-md-12 col-sm-12 intro-copy">
+	  		<div class="col-lg-10 col-lg-push-1 col-md-12 col-sm-12">
+					<p class="help-block">Usa tu micrófono(compatible solo con <a href="https://www.google.com/intl/en/chrome/browser/desktop/">Google Chrome</a> and <a href="https://www.mozilla.org/en-US/firefox/new/">Mozilla Firefox</a>), carga tus audios pre-grabados (uncompressed 16 KHz mono WAV or FLAC) o arrastra y suelta un archivo de audio seleccionado dentro de la página. Prueba los archivos de ejemplo provistos. Selecciona tu lenguaje a traducir. Usa &#9654;/&#x025FC; para reproducir/detener la traducción.
+					<br><input type="checkbox" id="microphone_streaming" />Estoy usando un headset con micrófono.
+					<br>
+					</p>
+				</div><!-- .col-lg-8 -->
+	  	</div>
+	  </div>
+	  <div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 intro-copy">
+           <div class="col-lg-5 col-lg-push-1 col-md-5 col-md-push-1 col-sm-12">			
+			  <div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+					  <span id="dropdownMenuDefault" class="dropdown-text">Selecciona tu lenguaje</span>
+					  <span class="caret"></span>
+				  </button>
+				  <ul id="dropdownMenuList" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+				  </ul>
+			  </div>
+		  </div>
+          <div class="col-lg-5 col-lg-push-1 col-md-5 col-md-push-1 col-sm-12">			
+			  <div class="dropdown">
+				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuInput" data-toggle="dropdown" aria-expanded="true">
+					  <span id="dropdownMenuTargetLanguageDefault" class="dropdown-text">Selecciona tu lenguaje destino</span>
+						<span class="caret"></span>
+				  </button>
+				  <ul id="dropdownMenuTargetLanguage" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu2" id="ulTargetLang">
+				  </ul>
+			   </div>
+		  </div>
+		</div><!-- .col-lg-12 -->
+		
+		<div class="row">
+		  <div class="col-lg-12 col-md-12 col-sm-12">
+			<div class="audioParent">
+			  <audio style="display:none" class="audio" controls>
+				Tu navegador no soporta el elemento de audio.
+			  </audio>
+			</div>
+		  </div>
+		</div><!-- row -->
+
+
+		<div class="row">
+		  <nav class="navbar navbar-inverse">
+			  <ul class="navbar-text">
+					<li id="recordButton" class="button-row nav-inverse-color">
+						<img id="microphoneIcon" src="images/microphone.svg" class="icon">
+						<span class="nav-label">Grabar</span>
+					</li>
+					<li class="file-upload button-row nav-inverse-color">
+						<div id="fileUploadTarget">
+						  <img src="images/upload.svg" class="icon"></img>
+						  <span class="nav-label">Selecciona Archivo</span>
+						</div>
+					</li>
+			  </ul>
+		  </nav>
+		</div>
+		<div class="row">
+			<nav class="navbar navbar-inverse navbar-secondary">
+				<ul class="navbar-text">
+					<li class="play-sample-1 button-row nav-inverse-color">
+						<img src="images/play.svg" class="icon">
+						<span class="nav-label">Reproducir Ejemplo 1</span>
+					</li>
+					<li class="play-sample-2 button-row nav-inverse-color">
+						<img src="images/play.svg" class="icon">
+						<span class="nav-label">Reproducir Ejemplo 2</span>
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Tab panes -->
+		<div class="row" style="  margin: 0;"> 
+		  <div class="col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+			<div class="well">
+			  <form autocomplete="off" class="form-horizontal">
+				<div role="tabpanel">
+
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home2" aria-controls="home" role="tab" data-toggle="tab">Texto</a></li>
+					<!-- <li role="presentation"><a href="#profile2" aria-controls="profile" role="tab" data-toggle="tab">JSON</a></li> -->
+				  </ul> 
+
+				  <div class="hr-tab"></div>
+
+				  <fieldset>
+
+					<div class="row error-row">
+					  <div class="col-lg-12">
+						<div id="errorAlert" >
+						  <span id="errorMessage"></span>
+						  <a class="pull-right" href="#" id="errorClose">&times;</a>
+						</div>
+					  </div>
+					</div>
+
+					<div class="row notification-row">
+					  <div class="col-lg-12">
+						<div id="notificationAlert" >
+						  <span id="notificationMessage"></span>
+						  <a class="pull-right" href="#" id="notificationClose">&times;</a>
+						</div>
+					  </div>
+					</div>
+
+
+					<div class="form-group row tabpanel-row">
+					  <div class="col-lg-12">
+						<div class="tab-content">
+						  <div role="tabpanel" class="tab-pane active" id="home2">
+							<textarea readonly id="resultsText"></textarea>
+						  </div>
+						</div>
+					  </div><!-- .col-lg-12 -->
+					</div>
+				  </fieldset>
+				</div>
+			  </form>
+			</div>
+		  </div><!-- /.well -->
+		</div><!-- /.tabpanel -->
+
+		
+		<div class="well">
+			<div role="tabpanel">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Traducción</a></li>
+				</ul>
+				<div class="hr-tab"></div>
+				<fieldset>
+					<div class="col-lg-12">
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="translation">
+								<textarea readonly></textarea>
+							</div>
+							<button id="playTTS">
+								<span>&#9654;</span>
+							</button>
+							<button id="stopTTS">
+								<span>&#x025FC;</span>
+							</button>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+		
+		<audio class="audio-tts" style="display:none">
+			Tu navegador no soporta el elemento de audio.
+		</audio>
+
+	  </div><!-- /.container -->
+
+      </div>		
+      <footer class="page-footer teal darken-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Descripción</h5>
+          <p class="grey-text text-lighten-4"> Aplicación Web que traduce de voz a a voz. Desarrollada usando servicios cognitivos de  IBM Bluemix.</p>
+
+
+        </div>
+        <div class="col l3 s12">
+          <h5 class="white-text">Link de Interes</h5>
+          <ul>
+            <li><a class="white-text" href="https://console.ng.bluemix.net/catalog/?taxonomyNavigation=apps&env_id=ibm:yp:us-south&category=watson"> Watson Bluemix</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Hecho por <a class="teal-text text-darken-4" href="https://www.linkedin.com/in/gustavo-retamozo-falcon-411583112/">Gustavo</a>
+      </div>
+    </div>
+  </footer>
+      <!-- for file upload dialog in toolbar -->
+      <input style="display:none" type="file" id="fileUploadDialog">
+
+      <!-- Place js files at the end of the document, with fallbacks for CDNs -->
+      <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+      <script>window.jQuery || document.write('<script src="js/jquery-1.11.3.min.js"><\/script>')</script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+      <script> (typeof $().emulateTransitionEnd == 'function')|| document.write('<script src="js/bootstrap-3.3.5.min.js"><\/script>')</script>
+      <script src="js/main.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  </body>
+</html>
